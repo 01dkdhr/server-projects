@@ -13,6 +13,10 @@ module.exports = {
         publicPath: '/dist/',
         filename: 'build.js'
     },
+    externals:{
+        'vue': 'Vue',
+        'vue-router': 'VueRouter'
+    },
     module: {
         rules: [{
                 test: /\.vue$/,

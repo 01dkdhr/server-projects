@@ -2,12 +2,20 @@ var path = require('path')
 var webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
+function resolve (dir) {
+    return path.join(__dirname, dir)
+}
+
 module.exports = {
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
         filename: 'build.js'
+    },
+    externals:{
+        'vue': 'Vue',
+        'vue-router': 'VueRouter'
     },
     module: {
         rules: [{
@@ -47,7 +55,10 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.esm.js',
+            '@src': resolve('src'),
+            '@components': resolve('src/components'),
+            '@router': resolve('src/router')
         }
     },
     devServer: {
