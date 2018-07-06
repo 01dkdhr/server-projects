@@ -33,7 +33,8 @@ module.exports = {
     },
     externals:{
         'vue': 'Vue',
-        'vue-router': 'VueRouter'
+        'vue-router': 'VueRouter',
+		'vuex': 'Vuex'
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
@@ -42,6 +43,7 @@ module.exports = {
             '@': resolve('src'),
             '@components': resolve('src/components'),
             '@router': resolve('src/router'),
+            '@store': resolve('src/store'),
         }
     },
     module: {

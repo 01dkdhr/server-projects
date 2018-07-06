@@ -27,7 +27,7 @@ export default {
     color: #2c3e50;
     margin-top: 60px;
 
-    .nav-link {
+    .router-link {
         cursor: pointer;
         user-select: none;
     }

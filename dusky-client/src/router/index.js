@@ -1,6 +1,15 @@
 Vue.use(VueRouter);
 
-const Home = resolve => require(['@components/home.vue'], resolve);
+const Home = resolve => require(['@components/home/index.vue'], resolve);
+const Tools = resolve => require(['@components/tools/index.vue'], resolve);
+
+// router.currentRoute:
+// {
+//     fullpath: "/tools",
+//     hase: "",
+//     name: "tools",
+//     path: "/tools"
+// }
 
 const router = new VueRouter({
     mode: 'history',
@@ -22,6 +31,11 @@ const router = new VueRouter({
             path: '/home',
             name: 'home',
             component: Home 
+        },
+        {
+            path: '/tools',
+            name: 'tools',
+            component: Tools 
         }
     ]
 });
