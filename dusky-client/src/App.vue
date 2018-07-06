@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="container">
         <navigator></navigator>
         <router-view/>
     </div>
@@ -25,11 +25,5 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
-
-    .router-link {
-        cursor: pointer;
-        user-select: none;
-    }
 }
 </style>

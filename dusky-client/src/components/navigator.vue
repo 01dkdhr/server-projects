@@ -1,25 +1,30 @@
 <template>
     <div id="navigator">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <router-link to="home" tag="span" class="navbar-brand router-link">
+        <nav role="navigation" class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                    <span class="sr-only">展开导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <router-link to="home" tag="a" class="navbar-brand">
                     Welcome To Dusky Home!
                 </router-link>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto">
-                        <router-link to="home" tag="li" 
-                            class="nav-link router-link"
-                            :class="{'active': curRouterName == 'home'}">
-                            Home
-                        </router-link>
+            </div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="nav navbar-nav">
+                    <router-link to="home" tag="li"
+                        :class="{'active': curRouterName == 'home'}">
+                        <a href="javascript:void(0);">Home</a>
+                    </router-link>
 
-                        <router-link to="tools" tag="li" 
-                            class="nav-link router-link"
-                            :class="{'active': curRouterName == 'tools'}">
-                            Tools
-                        </router-link>
-                    </ul>
-                </div>
+                    <router-link to="tools" tag="li"
+                        :class="{'active': curRouterName == 'tools'}">
+                        <a href="javascript:void(0);">Tools</a>
+                    </router-link>
+                </ul>
             </div>
         </nav>
     </div>
