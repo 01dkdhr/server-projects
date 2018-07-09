@@ -20,7 +20,7 @@
 export default {
     data() {
         return {
-            toolList: ['too1 1', 'too1 2', 'too1 3', 'too1 4', 'too1 5', 'too1 6', 'too1 7', 'too1 8', 'too1 9', 'too1 10']
+            toolList: ['tool 1', 'too1 2', 'too1 3', 'too1 4', 'too1 5', 'too1 6', 'too1 7', 'too1 8', 'too1 9', 'too1 10']
         };
     }
 }
@@ -37,6 +37,10 @@ export default {
         border: 1px dotted blue;
         cursor: pointer;
         color: cadetblue;
+
+        &:hover {
+            background-color: #f8f8f8;
+        }
     }
 }
 </style>
