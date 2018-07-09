@@ -1,12 +1,12 @@
 <template>
-    <div id="app" class="container">
+    <div id="app">
         <navigator></navigator>
         <router-view/>
     </div>
 </template>
 
 <script>
-import navigator from '@components/navigator.vue';
+import navigator from '@components/navigator/index.vue';
 export default {
     name: 'App',
     components: {
@@ -20,6 +20,7 @@ export default {
 
 <style lang="scss">
 #app {
+    // reset CSS
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
