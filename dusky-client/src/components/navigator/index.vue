@@ -1,33 +1,36 @@
 <template>
     <div id="navigator">
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" 
-                        data-toggle="collapse" data-target="#navbar" 
-                        aria-controls="navbar" aria-expanded="false" 
-                        aria-label="Toggle navigation">
+                <router-link to="home" tag="a" class="navbar-brand">
+                    Welcome To Dusky Home!
+                </router-link>
 
-                        <span class="sr-only">展开导航</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <router-link to="home" tag="a" class="navbar-brand">
-                        Welcome To Dusky Home!
-                    </router-link>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse in">
-                    <ul class="nav navbar-nav">
+                <button class="navbar-toggler"
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarResponsive" 
+                    aria-controls="navbarResponsive" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div id="navbarResponsive" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
                         <router-link to="home" tag="li"
+                            class="nav-item"
                             :class="{'active': curRouterName == 'home'}">
-                            <a href="javascript:void(0);">Home</a>
+
+                            <a class="nav-link" href="javascript:void(0);">Home</a>
                         </router-link>
 
                         <router-link to="tools" tag="li"
+                            class="nav-item"
                             :class="{'active': curRouterName == 'tools'}">
-                            <a href="javascript:void(0);">Tools</a>
+                            
+                            <a class="nav-link" href="javascript:void(0);">Tools</a>
                         </router-link>
                     </ul>
                 </div>
