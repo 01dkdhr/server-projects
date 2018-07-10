@@ -6,22 +6,49 @@
             </div>
             <div v-for="(tool, index) in toolList" 
                 :key="index"
-                class="col-6 col-sm-4 col-md-3 col-lg-2 tool-container"> 
+                class="col-6 col-sm-4 col-md-3 col-lg-2 tool-list"
+                @click="openTool(tool)"> 
 
                 <div class="tool-item">
-                    {{tool}}
+                    {{tool.showName}}
                 </div>
             </div>
+        </div>
+
+        <div class="row tool-container" v-if="currentTool !== null">
+            <h5 class="my-4">{{currentTool.showName}}</h5>
+            <jsonParser class="col-12 clear-pd" v-show="currentTool.token == 'jsonParser'"></jsonParser>
         </div>
     </div>
 </template>
 
 <script>
+import jsonParser from '@components/tools/components/jsonParser/index.vue';
+
 export default {
+    components: {
+        jsonParser
+    },
     data() {
         return {
-            toolList: ['tool 1', 'too1 2', 'too1 3', 'too1 4', 'too1 5', 'too1 6', 'too1 7', 'too1 8', 'too1 9', 'too1 10']
+            toolList: [
+                { token: 'jsonParser', showName: 'json解析' }
+            ],
+            openedToolList: [],
+            currentTool: null
         };
+    },
+    methods: {
+        openTool(tool) {
+            if (this.currentTool && this.currentTool.token == tool.token) {
+                return;
+            }
+
+            if (this.openedToolList.indexOf(tool) < 0) {
+                this.openedToolList.push(tool);    
+            }
+            this.currentTool = tool;
+        }    
     }
 }
 </script>
@@ -29,8 +56,10 @@ export default {
 <style lang="scss" scoped>
 .my-4 {
     color: cadetblue;
+    cursor: default;
+    user-select: none;
 }
-.tool-container {
+.tool-list {
     padding: 5px;
 
     .tool-item {
@@ -42,5 +71,10 @@ export default {
             background-color: #f8f8f8;
         }
     }
+}
+
+.tool-container {
+    margin-top: 30px;
+    border-top: 1px solid rgb(188, 222, 238);
 }
 </style>

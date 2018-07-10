@@ -1,7 +1,10 @@
 <template>
     <div id="app">
         <navigator></navigator>
-        <router-view/>
+
+        <keep-alive>
+            <router-view/>
+        </keep-alive>
     </div>
 </template>
 
@@ -26,5 +29,13 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+
+    .clear-pd {
+        padding: 0 5px;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
 }
 </style>
