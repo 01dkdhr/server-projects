@@ -15,8 +15,11 @@
             </div>
         </div>
 
-        <div class="row tool-container" v-if="currentTool !== null">
-            <h5 class="my-4">{{currentTool.showName}}</h5>
+        <div class="tool-container" v-if="currentTool !== null">
+            <div class="row">
+                <h5 class="my-4">{{currentTool.showName}}</h5>
+            </div>
+            
             <jsonParser class="col-12 clear-pd" v-show="currentTool.token == 'jsonParser'"></jsonParser>
         </div>
     </div>

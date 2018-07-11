@@ -34,8 +34,9 @@ export default {
         padding: 0 5px;
     }
 
-    .w-100 {
-        width: 100%;
+    .no-select {
+        cursor: default;
+        user-select: none;
     }
 }
 </style>
