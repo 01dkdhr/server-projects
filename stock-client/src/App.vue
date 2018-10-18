@@ -14,9 +14,9 @@ export default {
         }
     },
     created() {
-        axios.get(`${localConfig['api-host']}stock/stocl-list`)
+        axios.get(`${localConfig['api-host']}stock/stock-list`)
         .then((response) => {
-            console.log(response);
+            console.log(JSON.parse(response.data.result));
         })
         .catch((error) => {
             console.log(error);
