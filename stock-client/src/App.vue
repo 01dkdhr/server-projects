@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import localConfig from 'src$/../local-config.json';
+import localConfig from '@src/../local-config.json';
 export default {
     name: 'app',
     data () {
