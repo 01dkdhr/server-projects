@@ -5,12 +5,23 @@
 </template>
 
 <script>
+import localConfig from 'src$/../local-config.json';
 export default {
     name: 'app',
     data () {
         return {
-            
+            stocks: []    
         }
+    },
+    created() {
+        axios.get(`${localConfig['api-host']}stock/stocl-list`)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+            alert('get stock list err');
+        })
     }
 }
 </script>
