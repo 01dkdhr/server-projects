@@ -24,17 +24,17 @@ export default {
     },
     created() {
         // 测试数据
-        const testData = require('@src/testdata.js');
-        this.stocks = JSON.parse(testData["stock-list"]);
+        // const testData = require('@src/testdata.js');
+        // this.stocks = JSON.parse(testData["stock-list"]);
 
-        // axios.get(`${localConfig['api-host']}stock/stock-list`)
-        // .then((response) => {
-        //     this.stocks = JSON.parse(response.data.result);
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        //     alert('get stock list err');
-        // })
+        axios.get(`${localConfig['api-host']}stock/stock-list`)
+        .then((response) => {
+            this.stocks = JSON.parse(response.data.result);
+        })
+        .catch((error) => {
+            console.log(error);
+            alert('get stock list err');
+        })
     }
 }
 </script>
