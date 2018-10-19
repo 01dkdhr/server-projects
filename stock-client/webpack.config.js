@@ -2,7 +2,9 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-    entry: './src/stock_list/stock_list.js',
+    entry: {
+        'stock_list': './src/stock_list/stock_list.js'
+    },
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
