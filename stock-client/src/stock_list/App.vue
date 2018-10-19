@@ -6,7 +6,7 @@
             <span>交易所</span>
         </div>
         <div v-for="(stock, index) in stocks" :key="index" class="stock-list">
-            <span @click="stockClicked(stock)" class="name">{{stock.sec_name}}</span>
+            <a target="_blank" :href="`/daily_stock.html?symbol=${encodeURIComponent(stock.symbol)}`" class="name">{{stock.sec_name}}</a>
             <span>{{stock.symbol}}</span>
             <span>{{stock.exchange}}</span>
         </div>
@@ -35,11 +35,6 @@ export default {
         //     console.log(error);
         //     alert('get stock list err');
         // })
-    },
-    methods: {
-        stockClicked(stock) {
-            console.log('stock clicked:', stock.sec_name);
-        }
     }
 }
 </script>

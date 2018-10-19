@@ -1,44 +1,54 @@
 <template>
     <div id="app">
-        <div class="stock-title">
-            <span>名称</span>
-            <span>代码</span>
-            <span>交易所</span>
-        </div>
-        <div v-for="(stock, index) in stocks" :key="index" class="stock-list">
-            <span @click="stockClicked(stock)" class="name">{{stock.sec_name}}</span>
-            <span>{{stock.symbol}}</span>
-            <span>{{stock.exchange}}</span>
-        </div>
+        daily stock
     </div>
 </template>
 
 <script>
 import localConfig from '@src/../local-config.json';
+import utils from '@src/utils.js';
 export default {
     name: 'app',
     data () {
         return {
-            stocks: []    
+            info: null,
+            dailyData: []    
         }
     },
     created() {
         // 测试数据
-        const testData = require('@src/testdata.js');
-        this.stocks = JSON.parse(testData["stock-list"]);
+        // const testData = require('@src/testdata.js');
+        // this.initData(JSON.parse(testData["daily-stock"]));
 
-        // axios.get(`${localConfig['api-host']}stock/stock-list`)
-        // .then((response) => {
-        //     this.stocks = JSON.parse(response.data.result);
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        //     alert('get stock list err');
-        // })
+        const params = utils.getParamMap(location.href);
+        if (params.symbol) {
+            axios.get(`${localConfig['api-host']}stock/daily-stock?symbol=${params.symbol}`)
+            .then((response) => {
+                this.initData(JSON.parse(response.data.result));
+            })
+            .catch((error) => {
+                console.log(error);
+                alert('get stock list err');
+            });
+        } else {
+            alert('symbol is empty');   
+        }
     },
     methods: {
-        stockClicked(stock) {
-            console.log('stock clicked:', stock.sec_name);
+        initData(data) {
+            this.info = data.info;
+            data.data.forEach((item) => {
+                const time = new Date(parseInt(item.eob) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+                item.date = time.substring(0, time.indexOf(' '));
+                
+                this.dailyData.push(item);   
+            });
+            this.dailyData.sort((a, b) => {
+                return b.eob - a.eob;
+            });
+
+            console.log(this.info);
+            console.log(this.dailyData);
         }
     }
 }
