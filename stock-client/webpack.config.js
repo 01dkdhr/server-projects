@@ -3,7 +3,8 @@ var webpack = require('webpack')
 
 module.exports = {
     entry: {
-        'stock_list': './src/stock_list/stock_list.js'
+        'stock_list': './src/stock_list/main.js',
+        'daily_stock': './src/daily_stock/main.js'
     },
     output: {
         path: path.resolve(__dirname, './dist'),
