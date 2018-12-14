@@ -5,7 +5,7 @@ const package = require('../package.json');
 const htmlPath = path.join(__dirname, '../index.html');
 const distPath = path.join(__dirname, '../dist');
 const publicPath = path.join(__dirname, '../../../https-server/public');
-const publishPath = path.join(publicPath, 'stk-tick');
+const publishPath = publicPath;
 
 // 删除文件夹
 function deleteDirection(dirPath) {
