@@ -1,17 +1,13 @@
 <template>
-    <div id="home">
-        this is empty home page!
-    </div>
+  <div id="home">hello joker!</div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-
-        };
-    }
-}
+  data() {
+    return {};
+  }
+};
 </script>
 
 <style lang="sass" scoped>
