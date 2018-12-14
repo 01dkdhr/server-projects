@@ -28,11 +28,11 @@ export default {
     }
   },
   mounted() {
-
+    this.$store.dispatch('getTradeDate', {});
   },
   methods: {
     submit() {
-      this.$store.dispatch('getTradeDate');
+      this.$store.dispatch('getDatas');
     }
   }
 };
@@ -51,7 +51,7 @@ export default {
       line-height: 21px;
 
       & .date-input {
-        width: 60px;
+        width: 80px;
       }
 
       & * {

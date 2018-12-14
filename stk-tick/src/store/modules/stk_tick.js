@@ -29,7 +29,12 @@ const mutations = {
 
 const actions = {
   getDatas({ commit, state }) {
-    axios.get('/api/stock/stk-tick', {
+    if (!state.ts_code || !state.date) {
+      console.log('getDatas err: param err');
+      return;
+    }
+
+    axios.get('https://www.dusky.xyz/api/stock/stk-tick', {
       params: {
         ts_code: state.ts_code,
         date: state.date,
@@ -37,21 +42,30 @@ const actions = {
       }
     })
     .then((response) => {
-      console.log(response);
+      const arr = response.data.result.split('\r\n');
+      const dataArr = [];
+
+      arr.forEach((item) => {
+        const obj = item.split(',');
+        dataArr.push({
+
+        });
+      });
+      commit('updateState', { dataArr });
     })
     .catch((error) => {
       console.log(`getDatas err: ${error}`);
     });
   },
   getTradeDate({ commit, state }, { date, type }) {
-    axios.get('/api/stock/stk-tick', {
+    axios.get('https://www.dusky.xyz/api/stock/trade-date', {
       params: {
         date,
         type
       }
     })
     .then((response) => {
-      console.log(response);
+      commit('updateState', { date: response.data.result });
     })
     .catch((error) => {
       console.log(`getTradeDate err: ${error}`);
