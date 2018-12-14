@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     submit() {
-      this.$store.dispatch('getDatas');
+      this.$store.dispatch('getTradeDate');
     }
   }
 };

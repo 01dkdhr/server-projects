@@ -40,8 +40,22 @@ const actions = {
       console.log(response);
     })
     .catch((error) => {
-      console.log(`get /api/stock/stk-tick err: ${error}`);
+      console.log(`getDatas err: ${error}`);
     });
+  },
+  getTradeDate({ commit, state }, { date, type }) {
+    axios.get('/api/stock/stk-tick', {
+      params: {
+        date,
+        type
+      }
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(`getTradeDate err: ${error}`);
+    }); 
   }
 }
 
