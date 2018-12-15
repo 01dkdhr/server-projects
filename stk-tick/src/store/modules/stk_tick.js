@@ -14,7 +14,7 @@ for (let i = 0; i < timeFilterArray.length; ++i) {
 
 const state = {
   date: "",
-  ts_code: "",
+  ts_code: "002504.SZ",
   dataArr: [],
   time_filter: timeFilterArray[0]
 };
@@ -32,7 +32,6 @@ const mutations = {
 const actions = {
   getDatas({ commit, state }) {
     if (!state.ts_code || !state.date) {
-      console.log('getDatas err: param err');
       return;
     }
 
@@ -44,6 +43,9 @@ const actions = {
       }
     })
       .then((response) => {
+        if (!response.data.result || !response.data.result.length) {
+          return;
+        }
         const arr = response.data.result.split('\r\n');
         const dataArr = _.cloneDeep(state.dataArr);
 
@@ -69,16 +71,16 @@ const actions = {
             sp3: parseFloat(obj[15]).toFixed(2),
             sp4: parseFloat(obj[16]).toFixed(2),
             sp5: parseFloat(obj[17]).toFixed(2),
-            bq1: parseFloat(obj[18]).toFixed(2),
-            bq2: parseFloat(obj[19]).toFixed(2),
-            bq3: parseFloat(obj[20]).toFixed(2),
-            bq4: parseFloat(obj[21]).toFixed(2),
-            bq5: parseFloat(obj[22]).toFixed(2),
-            sq1: parseFloat(obj[23]).toFixed(2),
-            sq2: parseFloat(obj[24]).toFixed(2),
-            sq3: parseFloat(obj[25]).toFixed(2),
-            sq4: parseFloat(obj[26]).toFixed(2),
-            sq5: parseFloat(obj[27]).toFixed(2)
+            bq1: parseInt(obj[18]),
+            bq2: parseInt(obj[19]),
+            bq3: parseInt(obj[20]),
+            bq4: parseInt(obj[21]),
+            bq5: parseInt(obj[22]),
+            sq1: parseInt(obj[23]),
+            sq2: parseInt(obj[24]),
+            sq3: parseInt(obj[25]),
+            sq4: parseInt(obj[26]),
+            sq5: parseInt(obj[27])
           });
         });
         commit('updateState', { dataArr });
@@ -87,7 +89,7 @@ const actions = {
         console.log(`getDatas err: ${error}`);
       });
   },
-  getTradeDate({ commit, state }, { date, type }) {
+  getTradeDate({ dispatch, commit, state }, { date, type }) {
     axios.get('/api/stock/trade-date', {
       params: {
         date,
@@ -95,7 +97,8 @@ const actions = {
       }
     })
       .then((response) => {
-        commit('updateState', { date: response.data.result });
+        commit('updateState', { date: response.data.result, dataArr: [], time_filter: timeFilterArray[0] });
+        dispatch('getDatas');
       })
       .catch((error) => {
         console.log(`getTradeDate err: ${error}`);
@@ -108,6 +111,22 @@ const actions = {
     }
 
     state.time_filter = timeFilterArray[index + 1];
+    dispatch('getDatas');
+  },
+  preTradeDay({ dispatch, state }) {
+    if (!state.date) {
+      return;
+    }
+    dispatch('getTradeDate', { date: state.date, type: "pre" });
+  },
+  nextTradeDay({ dispatch, state }) {
+    if (!state.date) {
+      return;
+    }
+    dispatch('getTradeDate', { date: state.date, type: "next" });
+  },
+  setTimeFilter({ commit, dispatch }, { index }) {
+    commit('updateState', { time_filter: timeFilterArray[index], dataArr: [] });
     dispatch('getDatas');
   }
 }
