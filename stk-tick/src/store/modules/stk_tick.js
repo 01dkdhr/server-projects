@@ -1,5 +1,7 @@
+import _ from 'lodash';
+
 const timeFilterArray = [
-  [" 09:1", " 09:2", " 09:3"], [" 09:3"], [" 09:4"], [" 09:5"],
+  [" 09:1", " 09:2", " 09:3"], [" 09:4"], [" 09:5"],
   [" 10:0"], [" 10:1"], [" 10:2"], [" 10:3"], [" 10:4"], [" 10:5"],
   [" 11:0"], [" 11:1"], [" 11:2", " 11:30"],
   [" 13:0"], [" 13:1"], [" 13:2"], [" 13:3"], [" 13:4"], [" 13:5"],
@@ -34,7 +36,7 @@ const actions = {
       return;
     }
 
-    axios.get('https://www.dusky.xyz/api/stock/stk-tick', {
+    axios.get('/api/stock/stk-tick', {
       params: {
         ts_code: state.ts_code,
         date: state.date,
@@ -43,7 +45,7 @@ const actions = {
     })
       .then((response) => {
         const arr = response.data.result.split('\r\n');
-        const dataArr = [];
+        const dataArr = _.cloneDeep(state.dataArr);
 
         arr.forEach((item) => {
           if (!item || !item.split) {
@@ -52,31 +54,31 @@ const actions = {
           const obj = item.split(',');
           dataArr.push({
             time: obj[2].split(' ')[1],
-            price: obj[3],
+            price: parseFloat(obj[3]).toFixed(2),
             count: obj[4],
             sum: obj[5],
             amount: obj[6],
             direction: obj[7],
-            bp1: obj[8],
-            bp2: obj[9],
-            ob3: obj[10],
-            bp4: obj[11],
-            bp5: obj[12],
-            sp1: obj[13],
-            sp2: obj[14],
-            sp3: obj[15],
-            sp4: obj[16],
-            sp5: obj[17],
-            bq1: obj[18],
-            bq2: obj[19],
-            bq3: obj[20],
-            bq4: obj[21],
-            bq5: obj[22],
-            sq1: obj[23],
-            sq2: obj[24],
-            sq3: obj[25],
-            sq4: obj[26],
-            sq5: obj[27]
+            bp1: parseFloat(obj[8]).toFixed(2),
+            bp2: parseFloat(obj[9]).toFixed(2),
+            bp3: parseFloat(obj[10]).toFixed(2),
+            bp4: parseFloat(obj[11]).toFixed(2),
+            bp5: parseFloat(obj[12]).toFixed(2),
+            sp1: parseFloat(obj[13]).toFixed(2),
+            sp2: parseFloat(obj[14]).toFixed(2),
+            sp3: parseFloat(obj[15]).toFixed(2),
+            sp4: parseFloat(obj[16]).toFixed(2),
+            sp5: parseFloat(obj[17]).toFixed(2),
+            bq1: parseFloat(obj[18]).toFixed(2),
+            bq2: parseFloat(obj[19]).toFixed(2),
+            bq3: parseFloat(obj[20]).toFixed(2),
+            bq4: parseFloat(obj[21]).toFixed(2),
+            bq5: parseFloat(obj[22]).toFixed(2),
+            sq1: parseFloat(obj[23]).toFixed(2),
+            sq2: parseFloat(obj[24]).toFixed(2),
+            sq3: parseFloat(obj[25]).toFixed(2),
+            sq4: parseFloat(obj[26]).toFixed(2),
+            sq5: parseFloat(obj[27]).toFixed(2)
           });
         });
         commit('updateState', { dataArr });
@@ -86,7 +88,7 @@ const actions = {
       });
   },
   getTradeDate({ commit, state }, { date, type }) {
-    axios.get('https://www.dusky.xyz/api/stock/trade-date', {
+    axios.get('/api/stock/trade-date', {
       params: {
         date,
         type
@@ -98,6 +100,15 @@ const actions = {
       .catch((error) => {
         console.log(`getTradeDate err: ${error}`);
       });
+  },
+  loadMore({ dispatch, state }) {
+    const index = timeFilterArray.indexOf(state.time_filter);
+    if (index == timeFilterArray.length - 1) {
+      return;
+    }
+
+    state.time_filter = timeFilterArray[index + 1];
+    dispatch('getDatas');
   }
 }
 
