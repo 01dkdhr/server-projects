@@ -100,7 +100,7 @@ const actions = {
             count: obj[4],
             sum: obj[5],
             amount: obj[6],
-            direction: obj[7],
+            direction: getDirection(parseFloat(obj[3]).toFixed(2)),
             bp1: parseFloat(obj[8]).toFixed(2),
             bp2: parseFloat(obj[9]).toFixed(2),
             bp3: parseFloat(obj[10]).toFixed(2),
