@@ -71,6 +71,12 @@ const actions = {
             const arr1 = direct == 'b' ? ['bp1', 'bp2', 'bp3', 'bp4', 'bp5'] : ['sp1', 'sp2', 'sp3', 'sp4', 'sp5'];
             const arr2 = direct == 'b' ? ['bq1', 'bq2', 'bq3', 'bq4', 'bq5'] : ['sq1', 'sq2', 'sq3', 'sq4', 'sq5'];
 
+            if (direct == 'b' && p > preItem.bp1) {
+              return q;
+            } else if (direct == 's' && p < preItem.sp1) {
+              return q;
+            }
+
             for (let i = 0; i < 5; ++i) {
               if (preItem[arr1[i]] == p) {
                 return q - preItem[arr2[i]];
