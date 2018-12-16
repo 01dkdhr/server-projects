@@ -26,7 +26,7 @@
           <tr v-for="(item, index) in state.dataArr" :key="index">
             <td> {{item.time}} </td>
             <td> {{item.price}} </td>
-            <td :class="{ red: item.direction == 'B', green: item.direction == 'S' }"> {{item.direction}} </td>
+            <td :class="{ red: item.direction == 1, green: item.direction == -1 }"> {{item.direction == 1 ? "B" : (item.direction == -1 ? "S" : "")}} </td>
             <td> {{item.amount}} </td>
             <td>
               <span class="col-1">{{item.bp1}} /</span><span class="col-2">{{item.bq1}}</span> | <span class="col-3" :class="{red:item.bq1Change>0,green:item.bq1Change<0}">{{item.bq1Change==0?'':((item.bq1Change>0?'+':'') + item.bq1Change)}}</span></br>

@@ -86,6 +86,14 @@ const actions = {
             return 0;
           }
 
+          function getDirection(price) {
+            if (!preItem) {
+              return 0;
+            }
+
+            return (price > preItem.price) ? 1 : (price < preItem.price ? -1 : 0);
+          }
+
           dataArr.push({
             time: obj[2].split(' ')[1],
             price: parseFloat(obj[3]).toFixed(2),
