@@ -29,17 +29,17 @@
             <td :class="{ red: item.direction == 'B', green: item.direction == 'S' }"> {{item.direction}} </td>
             <td> {{item.amount}} </td>
             <td>
-              <span :class="{ red: item.bp1 == item.price }">{{item.bp1}}</span> / {{item.bq1}}</br>
-              <span :class="{ red: item.bp2 == item.price }">{{item.bp2}}</span> / {{item.bq2}}</br>
-              <span :class="{ red: item.bp3 == item.price }">{{item.bp3}}</span> / {{item.bq3}}</br>
-              <span :class="{ red: item.bp4 == item.price }">{{item.bp4}}</span> / {{item.bq4}}</br>
-              <span :class="{ red: item.bp5 == item.price }">{{item.bp5}}</span> / {{item.bq5}}</td>
+              <span class="col-1">{{item.bp1}} /</span><span class="col-2">{{item.bq1}}</span> | <span class="col-3" :class="{red:item.bq1Change>0,green:item.bq1Change<0}">{{item.bq1Change==0?'':((item.bq1Change>0?'+':'') + item.bq1Change)}}</span></br>
+              <span class="col-1">{{item.bp2}} /</span><span class="col-2">{{item.bq2}}</span> | <span class="col-3" :class="{red:item.bq2Change>0,green:item.bq2Change<0}">{{item.bq2Change==0?'':((item.bq2Change>0?'+':'') + item.bq2Change)}}</span></br>
+              <span class="col-1">{{item.bp3}} /</span><span class="col-2">{{item.bq3}}</span> | <span class="col-3" :class="{red:item.bq3Change>0,green:item.bq3Change<0}">{{item.bq3Change==0?'':((item.bq3Change>0?'+':'') + item.bq3Change)}}</span></br>
+              <span class="col-1">{{item.bp4}} /</span><span class="col-2">{{item.bq4}}</span> | <span class="col-3" :class="{red:item.bq4Change>0,green:item.bq4Change<0}">{{item.bq4Change==0?'':((item.bq4Change>0?'+':'') + item.bq4Change)}}</span></br>
+              <span class="col-1">{{item.bp5}} /</span><span class="col-2">{{item.bq5}}</span> | <span class="col-3" :class="{red:item.bq5Change>0,green:item.bq5Change<0}">{{item.bq5Change==0?'':((item.bq5Change>0?'+':'') + item.bq5Change)}}</span></td>
             <td>
-              <span :class="{ red: item.sp1 == item.price }">{{item.sp1}}</span> / {{item.sq5}}</br>
-              <span :class="{ red: item.sp2 == item.price }">{{item.sp2}}</span> / {{item.sq4}}</br>
-              <span :class="{ red: item.sp3 == item.price }">{{item.sp3}}</span> / {{item.sq3}}</br>
-              <span :class="{ red: item.sp4 == item.price }">{{item.sp4}}</span> / {{item.sq2}}</br>
-              <span :class="{ red: item.sp5 == item.price }">{{item.sp5}}</span> / {{item.sq1}}</td>
+              <span class="col-1">{{item.sp1}} /</span><span class="col-2">{{item.sq1}}</span> | <span class="col-3" :class="{red:item.sq1Change>0,green:item.sq1Change<0}">{{item.sq1Change==0?'':((item.sq1Change>0?'+':'') + item.sq1Change)}}</span></br>
+              <span class="col-1">{{item.sp2}} /</span><span class="col-2">{{item.sq2}}</span> | <span class="col-3" :class="{red:item.sq2Change>0,green:item.sq2Change<0}">{{item.sq2Change==0?'':((item.sq2Change>0?'+':'') + item.sq2Change)}}</span></br>
+              <span class="col-1">{{item.sp3}} /</span><span class="col-2">{{item.sq3}}</span> | <span class="col-3" :class="{red:item.sq3Change>0,green:item.sq3Change<0}">{{item.sq3Change==0?'':((item.sq3Change>0?'+':'') + item.sq3Change)}}</span></br>
+              <span class="col-1">{{item.sp4}} /</span><span class="col-2">{{item.sq4}}</span> | <span class="col-3" :class="{red:item.sq4Change>0,green:item.sq4Change<0}">{{item.sq4Change==0?'':((item.sq4Change>0?'+':'') + item.sq4Change)}}</span></br>
+              <span class="col-1">{{item.sp5}} /</span><span class="col-2">{{item.sq5}}</span> | <span class="col-3" :class="{red:item.sq5Change>0,green:item.sq5Change<0}">{{item.sq5Change==0?'':((item.sq5Change>0?'+':'') + item.sq5Change)}}</span></td>
           </tr>
         </tbody>
       </table>
@@ -166,6 +166,28 @@ export default {
 				border-bottom:1px solid #888;
 				padding:5px 15px;
       }
+    }
+
+    .col-1 {
+      line-height: 21px;
+      display: inline-block;
+      text-align: right;
+      width: 80px;
+    }
+
+    .col-2 {
+      line-height: 21px;
+      display: inline-block;
+      text-align: left;
+      margin-left: 8px;
+      width: 50px;
+    }
+
+    .col-3 {
+      line-height: 21px;
+      display: inline-block;
+      text-align: left;
+      width: 50px;
     }
 
     .red {

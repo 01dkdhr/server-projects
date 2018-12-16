@@ -14,7 +14,7 @@ for (let i = 0; i < timeFilterArray.length; ++i) {
 
 const state = {
   date: "",
-  ts_code: "002504.SZ",
+  ts_code: localStorage["ts_code"] || '',
   dataArr: [],
   time_filter: timeFilterArray[0]
 };
@@ -35,6 +35,8 @@ const actions = {
       return;
     }
 
+    localStorage.setItem("ts_code", state.ts_code);
+
     axios.get('/api/stock/stk-tick', {
       params: {
         ts_code: state.ts_code,
@@ -53,7 +55,31 @@ const actions = {
           if (!item || !item.split) {
             return;
           }
+
+          let preItem = null;
+          if (dataArr.length) {
+            preItem = dataArr[dataArr.length - 1]; 
+          }
+
           const obj = item.split(',');
+
+          function getChange(direct, p, q) {
+            if (!preItem) {
+              return 0;
+            }
+
+            const arr1 = direct == 'b' ? ['bp1', 'bp2', 'bp3', 'bp4', 'bp5'] : ['sp1', 'sp2', 'sp3', 'sp4', 'sp5'];
+            const arr2 = direct == 'b' ? ['bq1', 'bq2', 'bq3', 'bq4', 'bq5'] : ['sq1', 'sq2', 'sq3', 'sq4', 'sq5'];
+
+            for (let i = 0; i < 5; ++i) {
+              if (preItem[arr1[i]] == p) {
+                return q - preItem[arr2[i]];
+              }
+            }
+
+            return 0;
+          }
+
           dataArr.push({
             time: obj[2].split(' ')[1],
             price: parseFloat(obj[3]).toFixed(2),
@@ -72,15 +98,25 @@ const actions = {
             sp4: parseFloat(obj[16]).toFixed(2),
             sp5: parseFloat(obj[17]).toFixed(2),
             bq1: parseInt(obj[18]),
+            bq1Change: getChange('b', parseFloat(obj[8]).toFixed(2), parseInt(obj[18])),
             bq2: parseInt(obj[19]),
+            bq2Change: getChange('b', parseFloat(obj[9]).toFixed(2), parseInt(obj[19])),
             bq3: parseInt(obj[20]),
+            bq3Change: getChange('b', parseFloat(obj[10]).toFixed(2), parseInt(obj[20])),
             bq4: parseInt(obj[21]),
+            bq4Change: getChange('b', parseFloat(obj[11]).toFixed(2), parseInt(obj[21])),
             bq5: parseInt(obj[22]),
+            bq5Change: getChange('b', parseFloat(obj[12]).toFixed(2), parseInt(obj[22])),
             sq1: parseInt(obj[23]),
+            sq1Change: getChange('s', parseFloat(obj[13]).toFixed(2), parseInt(obj[23])),
             sq2: parseInt(obj[24]),
+            sq2Change: getChange('s', parseFloat(obj[14]).toFixed(2), parseInt(obj[24])),
             sq3: parseInt(obj[25]),
+            sq3Change: getChange('s', parseFloat(obj[15]).toFixed(2), parseInt(obj[25])),
             sq4: parseInt(obj[26]),
-            sq5: parseInt(obj[27])
+            sq4Change: getChange('s', parseFloat(obj[16]).toFixed(2), parseInt(obj[26])),
+            sq5: parseInt(obj[27]),
+            sq5Change: getChange('s', parseFloat(obj[17]).toFixed(2), parseInt(obj[27])),
           });
         });
         commit('updateState', { dataArr });
