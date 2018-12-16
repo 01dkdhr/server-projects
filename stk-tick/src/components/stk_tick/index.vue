@@ -35,11 +35,11 @@
               <span class="col-1">{{item.bp4}} /</span><span class="col-2">{{item.bq4}}</span> | <span class="col-3" :class="{red:item.bq4Change>0,green:item.bq4Change<0}">{{item.bq4Change==0?'':((item.bq4Change>0?'+':'') + item.bq4Change)}}</span></br>
               <span class="col-1">{{item.bp5}} /</span><span class="col-2">{{item.bq5}}</span> | <span class="col-3" :class="{red:item.bq5Change>0,green:item.bq5Change<0}">{{item.bq5Change==0?'':((item.bq5Change>0?'+':'') + item.bq5Change)}}</span></td>
             <td>
-              <span class="col-1">{{item.sp1}} /</span><span class="col-2">{{item.sq1}}</span> | <span class="col-3" :class="{red:item.sq1Change>0,green:item.sq1Change<0}">{{item.sq1Change==0?'':((item.sq1Change>0?'+':'') + item.sq1Change)}}</span></br>
-              <span class="col-1">{{item.sp2}} /</span><span class="col-2">{{item.sq2}}</span> | <span class="col-3" :class="{red:item.sq2Change>0,green:item.sq2Change<0}">{{item.sq2Change==0?'':((item.sq2Change>0?'+':'') + item.sq2Change)}}</span></br>
-              <span class="col-1">{{item.sp3}} /</span><span class="col-2">{{item.sq3}}</span> | <span class="col-3" :class="{red:item.sq3Change>0,green:item.sq3Change<0}">{{item.sq3Change==0?'':((item.sq3Change>0?'+':'') + item.sq3Change)}}</span></br>
-              <span class="col-1">{{item.sp4}} /</span><span class="col-2">{{item.sq4}}</span> | <span class="col-3" :class="{red:item.sq4Change>0,green:item.sq4Change<0}">{{item.sq4Change==0?'':((item.sq4Change>0?'+':'') + item.sq4Change)}}</span></br>
-              <span class="col-1">{{item.sp5}} /</span><span class="col-2">{{item.sq5}}</span> | <span class="col-3" :class="{red:item.sq5Change>0,green:item.sq5Change<0}">{{item.sq5Change==0?'':((item.sq5Change>0?'+':'') + item.sq5Change)}}</span></td>
+              <span class="col-1">{{item.sp1}} /</span><span class="col-2">{{item.sq1}}</span> | <span class="col-3" :class="{red:item.sq1Change<0,green:item.sq1Change>0}">{{item.sq1Change==0?'':((item.sq1Change>0?'+':'') + item.sq1Change)}}</span></br>
+              <span class="col-1">{{item.sp2}} /</span><span class="col-2">{{item.sq2}}</span> | <span class="col-3" :class="{red:item.sq2Change<0,green:item.sq2Change>0}">{{item.sq2Change==0?'':((item.sq2Change>0?'+':'') + item.sq2Change)}}</span></br>
+              <span class="col-1">{{item.sp3}} /</span><span class="col-2">{{item.sq3}}</span> | <span class="col-3" :class="{red:item.sq3Change<0,green:item.sq3Change>0}">{{item.sq3Change==0?'':((item.sq3Change>0?'+':'') + item.sq3Change)}}</span></br>
+              <span class="col-1">{{item.sp4}} /</span><span class="col-2">{{item.sq4}}</span> | <span class="col-3" :class="{red:item.sq4Change<0,green:item.sq4Change>0}">{{item.sq4Change==0?'':((item.sq4Change>0?'+':'') + item.sq4Change)}}</span></br>
+              <span class="col-1">{{item.sp5}} /</span><span class="col-2">{{item.sq5}}</span> | <span class="col-3" :class="{red:item.sq5Change<0,green:item.sq5Change>0}">{{item.sq5Change==0?'':((item.sq5Change>0?'+':'') + item.sq5Change)}}</span></td>
           </tr>
         </tbody>
       </table>
