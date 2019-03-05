@@ -4,6 +4,7 @@
 
 <script>
 import localConfig from "@src/../local-config.json";
+import RequestService from "@src/assets/js/RequestService.js";
 export default {
   name: "app",
   data() {
@@ -12,24 +13,24 @@ export default {
     };
   },
   created() {
-    axios
-      .post(`${localConfig["api-host"]}tushare`, {
-        api_name: "dividend",
-        params: {
-          ts_code: "600000.SH",
-          start_date: "20180101",
-          end_date: "20180730"
-        },
-        fields: "ts_code,div_proc,stk_div,record_date,ex_date"
-      })
-      .then(response => {
-        this.tmp = JSON.parse(response.data.result);
-        console.log(this.tmp);
-      })
-      .catch(error => {
-        console.log(error);
-        alert("get data err");
-      });
+    this.getData();
+  },
+  methods: {
+    async getData() {
+      const result = await RequestService.post(
+        `${localConfig["api-host"]}tushare`,
+        {
+          api_name: "dividend",
+          params: {
+            ts_code: "600000.SH",
+            start_date: "20180101",
+            end_date: "20180730"
+          }
+        }
+      );
+
+      console.log(result);
+    }
   }
 };
 </script>
